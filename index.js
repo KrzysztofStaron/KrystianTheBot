@@ -6,9 +6,9 @@ let wiernyRole="Wierny";
 let prefix="*";
 let zaproszeni={};
 let wiadomosciChannel;
-let informacje = JSON.parse(fs.readFileSync('informacje.json'));
+if (!fs.existsSync("info.json")) {fs.writeFileSync('info.json', JSON.stringify({}))};
+let informacje = JSON.parse(fs.readFileSync('info.json'));
 
-if (!fs.existsSync("informacje.json")) {fs.writeFileSync('informacje.json', JSON.stringify({}))};
 
 client.on('ready', () => {
   console.log(`Krystian nam sie objawil`);
@@ -17,7 +17,7 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  informacje = JSON.parse(fs.readFileSync('informacje.json'));
+  informacje = JSON.parse(fs.readFileSync('info.json'));
   if (msg.author.bot) {return;}
   informacje.messages++;
   wiadomosciChannel.setName("Wiadomosci: "+informacje.messages);
@@ -62,7 +62,7 @@ client.on('message', msg => {
 
   }
 
-  fs.writeFileSync('informacje.json',JSON.stringify(informacje));
+  fs.writeFileSync('info.json',JSON.stringify(informacje));
 });
 
 client.login(JSON.parse(fs.readFileSync('token.txt', 'utf8')));
