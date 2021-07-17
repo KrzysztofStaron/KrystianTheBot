@@ -65,4 +65,4 @@ client.on('message', msg => {
   fs.writeFileSync('informacje.json',JSON.stringify(informacje));
 });
 
-client.login("ODE3MDcyMzc0NzQxNTk4MzA5.YEEL8g.5VLKFiXUARTgxlgNch5M1v4Bp0k");
+client.login(JSON.parse(fs.readFileSync('token.txt', 'utf8')));
