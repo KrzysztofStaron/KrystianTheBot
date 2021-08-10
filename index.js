@@ -62,6 +62,16 @@ client.on('message', msg => {
 
   }
 
+  if (getCommand()[0]=="*server") {
+    const tcpp = require('tcp-ping');
+    const ip = require("ip");
+    const host = ip.address();
+    const port = 25565;
+    tcpp.probe(host, port, function(err, available) {
+      send(`Status: **${available}** ,Ip: **${host}** ,Port: *${port}*, Version: **1.17.1**`);  //ip: 192.168.1.140, version: 1.17.1
+    });
+  }
+
   fs.writeFileSync('info.json',JSON.stringify(informacje));
 });
 
